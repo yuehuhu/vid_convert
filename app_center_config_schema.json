@@ -1,0 +1,140 @@
+{
+  "type" : "object",
+  "properties" : {
+    "database" : {
+      "type" : "object",
+      "properties" : {
+        "vendors" : {
+          "type" : "object",
+          "properties" : {
+            "host" : {
+                       "type" : "string",
+                       "format" : "uri"
+                     },
+            "user" : {"type" : "string"},
+            "passwd" : {"type" : "string"},
+            "db" : {"type" : "string"}
+          },
+          "additionalProperties": false
+        },
+        "cluster" : {
+          "type" : "object",
+          "properties" : {
+            "host" : {"type" : "string"},
+            "user" : {"type" : "string"},
+            "passwd" : {"type" : "string"},
+            "db" : {"type" : "string"}
+          },
+          "additionalProperties": false
+        }, 
+        "disable" : {
+          "type" : "object",
+          "properties" : {
+            "host" : {"type" : "string"},
+            "user" : {"type" : "string"},
+            "passwd" : {"type" : "string"},
+            "db" : {"type" : "string"}
+          },
+          "additionalProperties": false
+        },
+        "disable_ip" : {
+          "type" : "object",
+          "properties" : {
+            "host" : {"type" : "string"},
+            "user" : {"type" : "string"},
+            "passwd" : {"type" : "string"},
+            "db" : {"type" : "string"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "strategy" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "enum" : ["idc_distance", "idc_isp", "idc_random", "specify_region", "vendor_region"]
+      }
+    },
+    "vendor_region" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "vid" : {"type" : "integer"},
+          "appid" : {
+            "type" : "string",
+            "minLength" : 32,
+            "maxLength" : 32
+          },
+          "region" : {"type" : "string"}
+        }
+      }
+    },
+    "isp_region" : {
+      "type" : "object",
+      "properties" : {
+        "AP" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : ["HK", "TW", "JP", "KP", "KR", "MN", "BD", "BT", "IO", "IN", "MV", "NP", "PK", "LK", "BN", "KH", "TL", "ID", "LA", "MY", "MM", "PH", "SG", "TH", "AU", "NZ", "FM", "PF"]
+          }
+        },
+        "VN" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : ["VN"]
+          }
+        }
+      }
+    },
+    "worker_role" : {"type" : "string"},
+    "cloud_provider" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "enum" : ["aliyun", "aws", "capital", "jinshan", "huaweiyun"]
+      }
+    },
+    "random_distance" : {
+      "type" : "string",
+      "pattern" : "(([1-9]{1}[0-9]{2,3});)*([1-9]{1}[0-9]{2,3})"
+    },
+    "converge_key_list" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "enum" : ["appId", "cname", "uid", "sid"]
+      }
+    },
+    "converge_strategy" : {
+      "type" : "string",
+      "pattern" : "_converge$"
+    },
+    "service_name" : {
+      "type" : "string",
+      "enum" : ["mix_streaming", "raw_streaming", "cloud_player", "rtmp_pusher", "cloud_proxy"]
+    },
+    "env_conf" : {
+      "type" : "string",
+      "pattern" : ".json$"
+    },
+    "serve_sdk_port" : {
+      "type" : "integer",
+      "minimum" : 1024,
+      "exclusiveMaximum" : 65535
+    },
+    "serve_edge_port" : {
+      "type" : "integer",
+      "minimum" : 1024,
+      "exclusiveMaximum" : 65535
+    },
+    "audio_expire_time" : {"type" : "integer"},
+    "video_expire_time" : {"type" : "integer"}
+  },
+  "required" : ["database", "worker_role", "converge_key_list", "converge_strategy", "service_name", "serve_sdk_port", "serve_edge_port"],
+  "additionalProperties": false
+}
