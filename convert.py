@@ -164,8 +164,9 @@ def generate(inputFile,workerFile,appFile,outWorker,outApp):
                     workerConfig[key_feature].update(tmpdict)
     
     # 校验新生成的worker-manager.json的格式,如果正确，就输出worker-manager.json
-    json_str = json.dumps(workerConfig,sort_keys=False)
+    json_str = json.dumps(workerConfig,separators=(',', ':'),sort_keys=False)
     worker_file_content["workerManager"]["workerConfig"]=json_str
+    print(json_str)
     schemaContent(worker_file_content,work_schema_file)
     json_workerConfig = json.dumps(worker_file_content,ensure_ascii=False,sort_keys=False)
     with open(outWorker, 'w', encoding='UTF-8') as f:
@@ -180,7 +181,7 @@ def generate(inputFile,workerFile,appFile,outWorker,outApp):
         f.write(json_appConfig)
     print("parse total mix file success, and generate worker-manager.json and app-center.json success\n")
 
-#
+
 # if __name__ == '__main__':
 #     parse("worker-manager.json","app-center.json","result.json")
-    # generate("result.json","worker-manager.json","app-center.json","worker-manager1.json","app-center1.json")
+#     generate("result.json","worker-manager.json","app-center.json","worker-manager1.json","app-center1.json")
