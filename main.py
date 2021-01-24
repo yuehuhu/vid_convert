@@ -27,11 +27,11 @@ parser.add_argument(
     'usage',
     help='（input parse or generate）\n \
     parse:\n \
-        format:  python3 main.py parse -iw input worker-manager.json -ia input app-center.json -o output.json\n \
-        example: python3 main.py parse -iw worker-manager.json -ia app-center.json -o result.json\n \
+        format:  python main.py parse -iw input worker-manager.json -ia input app-center.json -o output.json\n \
+        example: python main.py parse -iw worker-manager.json -ia app-center.json -o result.json\n \
     generate:\n \
-        format:  python3 main.py generate -i input.json -iw input worker-manager.json -ia input app-center.json -ow output worker-manager.json -oa output app-center.json\n \
-        example: python3 main.py generate -i result.json -iw worker-manager.json -ia app-center.json -ow worker-manager1.json -oa app-center1.json'
+        format:  python main.py generate -i input.json -iw input worker-manager.json -ia input app-center.json -ow output worker-manager.json -oa output app-center.json\n \
+        example: python main.py generate -i result.json -iw worker-manager.json -ia app-center.json -ow worker-manager1.json -oa app-center1.json'
 )
 
 parser.add_argument(

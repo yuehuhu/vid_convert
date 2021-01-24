@@ -15,14 +15,14 @@ def sortdict(configdict):
     return newConfigDict
 
 def schemaJson(config_file,schema_file):
-    with open(config_file, 'r') as configFile:
+    with open(config_file, 'r', encoding='UTF-8') as configFile:
         config_file_content=json.load(configFile)
-    with open(schema_file, 'r') as schemaFile:
+    with open(schema_file, 'r', encoding='UTF-8') as schemaFile:
         worker_schema_content = json.load(schemaFile)
     validate(config_file_content, schema=worker_schema_content)
    
 def schemaContent(config_content,schema_file):
-    with open(schema_file, 'r') as schemaFile:
+    with open(schema_file, 'r', encoding='UTF-8') as schemaFile:
         worker_schema_content = json.load(schemaFile)
     validate(config_content, schema=worker_schema_content)
 
@@ -35,7 +35,7 @@ def parse(workerFile,appFile,outputFile):
 
     # 获取所有的vid
     # 获取worker-manager.json中所有出现过的vid
-    with open(workerFile, 'r') as worker_file:
+    with open(workerFile, 'r', encoding='UTF-8') as worker_file:
         worker_file_content=json.load(worker_file)
     workerConfigContent=worker_file_content["workerManager"]["workerConfig"]
     workerConfigDetails=json.loads(workerConfigContent)
@@ -57,7 +57,7 @@ def parse(workerFile,appFile,outputFile):
             globalFeature[key]=workerConfigDetails[key]
 
     # 获取app-center.json中所有出现过的vid
-    with open(appFile, 'r') as app_file:
+    with open(appFile, 'r', encoding='UTF-8') as app_file:
         app_file_content=json.load(app_file)   
     vendorRegionDetails=app_file_content["vendor_region"]
     for i in range(len(vendorRegionDetails)):
@@ -104,7 +104,7 @@ def parse(workerFile,appFile,outputFile):
         configlist.append(tmpdict)
 
     json_str = json.dumps(configlist,ensure_ascii=False,sort_keys=False)
-    with open(outputFile, 'w') as f:
+    with open(outputFile, 'w', encoding='UTF-8') as f:
         f.write(json_str) 
     print("parse worker-manager.json and app-center.json success, and generate total mix file success\n")
 
@@ -116,11 +116,11 @@ def generate(inputFile,workerFile,appFile,outWorker,outApp):
     schemaJson(appFile,app_schema_file)
     
     # 校验 app-center.json的格式
-    with open(workerFile, 'r') as worker_file:
+    with open(workerFile, 'r', encoding='UTF-8') as worker_file:
         worker_file_content=json.load(worker_file)
-    with open(appFile, 'r') as app_file:
+    with open(appFile, 'r', encoding='UTF-8') as app_file:
         app_file_content=json.load(app_file)
-    with open(inputFile, 'r') as f:
+    with open(inputFile, 'r', encoding='UTF-8') as f:
         content=json.load(f)
 
     workerConfig={}
@@ -168,7 +168,7 @@ def generate(inputFile,workerFile,appFile,outWorker,outApp):
     worker_file_content["workerManager"]["workerConfig"]=json_str
     schemaContent(worker_file_content,work_schema_file)
     json_workerConfig = json.dumps(worker_file_content,ensure_ascii=False,sort_keys=False)
-    with open(outWorker, 'w') as f:
+    with open(outWorker, 'w', encoding='UTF-8') as f:
         f.write(json_workerConfig)
     
 
@@ -176,11 +176,11 @@ def generate(inputFile,workerFile,appFile,outWorker,outApp):
     app_file_content["vendor_region"]=sorted_appConfig
     schemaContent(app_file_content,app_schema_file)
     json_appConfig = json.dumps(app_file_content,ensure_ascii=False,sort_keys=False)
-    with open(outApp, 'w') as f:
+    with open(outApp, 'w', encoding='UTF-8') as f:
         f.write(json_appConfig)
     print("parse total mix file success, and generate worker-manager.json and app-center.json success\n")
 
-
+#
 # if __name__ == '__main__':
 #     parse("worker-manager.json","app-center.json","result.json")
-#     generate("result.json","worker-manager.json","app-center.json","worker-manager1.json","app-center1.json")
+    # generate("result.json","worker-manager.json","app-center.json","worker-manager1.json","app-center1.json")
