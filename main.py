@@ -1,81 +1,100 @@
-import os
 import argparse
-import json
+
 from convert import parse
 from convert import generate
-#  subcomand
-#  -a app center config
-#  -w worker manager config
-#  -o output file
-#  -i input file
+
 #
 #  parse:
-#      format:  python3 main.py parse -iw input worker-manager.json -ia input app-center.json -o output.json
-#      example: python3 main.py parse -iw worker-manager.json -ia app-center.json -o result.json
-
+#      python3 main.py parse \
+#      -iw input worker-manager.json \
+#      -ia input app-center.json \
+#      -o output.json
+#
 #  generate:
-#     format:  python3 main.py generate -i input.json -iw input worker-manager.json -ia input app-center.json -ow output worker-manager.json -oa output app-center.json
-#     example: python3 main.py generate -i result.json -iw worker-manager.json -ia app-center.json -ow worker-manager1.json -oa app-center1.json
+#      python3 main.py generate \
+#      -i input.json \
+#      -iw input worker-manager.json \
+#      -ia input app-center.json \
+#      -ow output worker-manager.json \
+#      -oa output app-center.json
+from write_sql import write_sql
 
 parser = argparse.ArgumentParser(
     prog='converter',
-    formatter_class=argparse.RawTextHelpFormatter,
     description='parse or generate config files'
-)
-
-parser.add_argument(
-    'usage',
-    help='（input parse or generate）\n \
-    parse:\n \
-        format:  python main.py parse -iw input worker-manager.json -ia input app-center.json -o output.json\n \
-        example: python main.py parse -iw worker-manager.json -ia app-center.json -o result.json\n \
-    generate:\n \
-        format:  python main.py generate -i input.json -iw input worker-manager.json -ia input app-center.json -ow output worker-manager.json -oa output app-center.json\n \
-        example: python main.py generate -i result.json -iw worker-manager.json -ia app-center.json -ow worker-manager1.json -oa app-center1.json'
 )
 
 parser.add_argument(
     '-iw',
     dest='input_worker',
-    help='input worker-manager-config-file'
+    default='worker-manager.json',
+    help='source worker manager config file'
 )
 
 parser.add_argument(
     '-ia',
     dest='input_app',
-    help='input app-center-config-file'
+    default='app-center.json',
+    help='source app center config file'
 )
 
-parser.add_argument(
+sub_parser = parser.add_subparsers(
+    dest="sub",
+)
+
+parser_parser = sub_parser.add_parser('parse')
+parser_parser.add_argument(
     '-o',
     dest='output',
-    help='output.json'
+    default='config.json',
+    help='vid config files'
 )
 
-parser.add_argument(
+generate_parser = sub_parser.add_parser('generate')
+generate_parser.add_argument(
     '-i',
     dest='input',
-    help='input.json'
+    default='config.json',
+    help='vid config file'
 )
 
-parser.add_argument(
+generate_parser.add_argument(
     '-ow',
     dest='output_worker',
-    help='output worker-manager-config-file'
+    default='new-worker-manager.json',
+    help='new worker manager config file'
 )
 
-parser.add_argument(
+generate_parser.add_argument(
     '-oa',
     dest='output_app',
-    help='output app-center-config-file'
+    default='new-app-center.json',
+    help='new app center config file'
 )
 
+sql_parser = sub_parser.add_parser('sql')
+sql_parser.add_argument(
+    '-os',
+    dest='out_sql',
+    default='update.sql',
+    help='output sql file'
+)
+
+sql_parser.add_argument(
+    '-v',
+    dest='sql_version',
+    required=True,
+    help='idc config version'
+)
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    if(args.usage=="parse"):
-        parse(args.input_worker,args.input_app,args.output)
-    elif(args.usage=="generate"):
-        generate(args.input,args.input_worker,args.input_app,args.output_worker,args.output_app)
-       
-
+    if args.sub is None:
+        parser.print_help()
+        exit(0)
+    if args.sub == "parse":
+        parse(args.input_worker, args.input_app, args.output)
+    elif args.sub == "generate":
+        generate(args.input, args.input_worker, args.input_app, args.output_worker, args.output_app)
+    elif args.sub == 'sql':
+        write_sql(args.input_worker, args.out_sql, args.sql_version)

@@ -1,0 +1,4 @@
+# ignore python tempoery files
+__pycache__/
+venv/
+.idea/
