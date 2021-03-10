@@ -1,0 +1,209 @@
+{
+    "type": "object",
+    "properties": {
+        "name":{
+            "type": "string"
+        },
+        "keyList":{
+            "type": "array",
+            "items": {
+                "type" : "string"
+            }
+        },
+        "workerManager":{
+            "type": "object",
+            "required": [
+                "forWorkerPort"
+            ],
+            "properties": {
+                "forWorkerPort": {
+                    "type": "integer"
+                },
+                "httpPort": {
+                    "type": "integer"
+                },
+                "remoteConfig": {
+                    "type": "boolean"
+                },
+                "workerConfig": {
+                    "type": ["string"]
+                },
+                "workerCount": {
+                    "type": ["number", "string"]
+                }
+            }
+        },
+        "gateway": {
+            "type": "object",
+            "properties": {
+                "signalingAccount": {
+                    "type": "string"
+                },
+                "rtmAccount": {
+                    "type": "string"
+                },
+                "ssl": {
+                    "type": "object",
+                    "required": [
+                        "crt",
+                        "key"
+                    ],
+                    "properties": {
+                        "crt": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "tcpPort": {
+                    "type": "integer"
+                },
+                "tcpsPort": {
+                    "type": "integer"
+                },
+                "wssPort": {
+                    "type": "integer"
+                },
+                "httpPort": {
+                    "type": "integer"
+                },
+                "httpsPort": {
+                    "type": "integer"
+                },
+                "httpUrl": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true
+        },
+        "appCenter": {
+            "type": "object",
+            "properties": {
+                "CMCC": {
+                    "type": "object",
+                    "properties": {
+                        "host": {
+                            "type": "array",
+                            "additionalItems": true,
+                            "items": {
+                                "type" : "string",
+                                "pattern": "((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)"
+                            }
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "CTEL": {
+                    "type": "object",
+                    "properties": {
+                        "host": {
+                            "type": "array",
+                            "additionalItems": true,
+                            "items": {
+                                "type" : "string",
+                                "pattern": "((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)"
+                            }
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "CUCC": {
+                    "type": "object",
+                    "properties": {
+                        "host": {
+                            "type": "array",
+                            "additionalItems": true,
+                            "items": {
+                                "type" : "string",
+                                "pattern": "((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)"
+                            }
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "host": {
+                    "type": "array",
+                    "items": {
+                        "type" : "string",
+                        "pattern": "((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)"
+                    }
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "additionalProperties": false
+            },
+            "required": [
+                "host",
+                "port"
+            ],
+            "additionalProperties": true
+        },
+        "limit": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "integer"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "report":{
+            "type": "object",
+            "properties": {
+                "dir": {
+                    "type": "string"
+                },
+                "argus": {
+                    "type": "boolean"
+                },
+                "online": {
+                    "type": "boolean"
+                },
+                "ncs": {
+                    "type": "string"
+                }
+            }
+        },
+        "sdk":{
+            "type": "object",
+            "properties": {
+                "aliveTimeoutSeconds": {
+                    "type": "integer"
+                },
+                "checkConnectionClose": {
+                    "type": "boolean"
+                },
+                "fullCloseReport": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "stopNoHeartbeatWorker":{
+            "type": "boolean"
+        },
+        "test":{
+            "type": "boolean"
+        }
+
+    },
+    "required": [
+        "name",
+        "keyList",
+        "gateway",
+        "appCenter"
+    ]
+}

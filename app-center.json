@@ -1,0 +1,120 @@
+{
+      "database": {
+        "vendors": {
+          "host": "tcp://127.0.0.1:3325",
+          "user": "appcenter",
+          "passwd": "appcenterbestvoip",
+          "db": "uap_database"
+        },
+        "cluster": {
+          "host": "tcp://127.0.0.1:3325",
+          "user": "appcenter",
+          "passwd": "appcenterbestvoip",
+          "db": "uap_database"
+        },
+        "disable": {
+          "host": "tcp://127.0.0.1:3325",
+          "user": "appcenter",
+          "passwd": "appcenterbestvoip",
+          "db": "uap_database"
+        },
+        "disable_ip": {
+          "host": "tcp://127.0.0.1:3325",
+          "user": "appcenter",
+          "passwd": "appcenterbestvoip",
+          "db": "uap_database"
+        }
+      },
+      "strategy": ["idc_distance", "idc_isp", "idc_random", "specify_region", "vendor_region"],
+      "vendor_region":
+      [
+        {
+            "vid": 269713,
+            "appid": "36c1a702c6174b7db8df7cd6222f9fc9",
+            "region": "jinan10a-cucc;dalian9a-ctel;yancheng9-cmcc;xuzhou9-ctel"
+        },
+        {
+            "vid": 234652,
+            "appid": "d56e5e3df08c4c7cb89d906d4dd0e38c",
+            "region": "luoyang9a-cucc;wenzhou9-cmcc;xixian10-ctel;huzhou9-ctel"
+        },
+        {
+            "vid": 276357,
+            "appid": "a6f69a7528b04a23bbb3300b4730b3dc",
+            "region": "zhongshan10c-ctel"
+        },
+        {
+            "vid": 273798,
+            "appid": "21319707ed2e41ea8c9bf15ad0592471",
+            "region": "zhongshan10c-ctel"
+        },
+        {
+            "vid": 281552,
+            "appid": "44a8cc12038c464f96ad204b1981ee05",
+            "region": "luoyang1g-ctel"
+        },
+        {
+            "name": "lbhq",
+            "vid": 304746,
+            "appid": "51c290507c394cfb9b23e71ff1d466e1",
+            "region": "luoyang1g-ctel"
+        },
+        {
+            "name": "lbhq",
+            "vid": 304743,
+            "appid": "c6435d6e4ab346e7aeeaa94ddea7aa1c",
+            "region": "luoyang1g-ctel"
+        },
+        {
+            "vid": 240912,
+            "appid": "db3726407b4941dab0fbdd8d5a379251",
+            "region": "capital-singapore13;huaweiyun-singapore9",
+            "name": "全民K歌"
+        },
+        {
+            "vid": 345816,
+            "appid": "8421cab5657c405aa6ea037dd0722d91",
+            "region": "capital-singapore13;huaweiyun-singapore9",
+            "name": "全民K歌"
+        },
+        {
+            "vid":288413,
+            "appid": "19b2f327eff048d28ca7fad2c942333e",
+            "region": "beijing7-ctel;beijing7-cucc;beijing8-cmcc;dalian9a-ctel",
+            "name": "test env"
+        },
+        {
+            "vid":329751,
+            "appid": "d11ede6e97da4f3cb4f2ab17bc3a9497",
+            "region": "beijing7-ctel;beijing7-cucc;beijing8-cmcc;dalian9a-ctel",
+            "name": "优网项目-线上"
+        },
+        {
+            "vid":322910,
+            "appid": "aa1feb9afd2146ae8d29c96cdeb78c05",
+            "region": "beijing7-ctel;beijing7-cucc;beijing8-cmcc;dalian9a-ctel",
+            "name": "优网项目-测试"
+        },
+        {
+            "vid": 228642,
+            "appid": "2fa7c50c45a34bb99f0e1ee2dc0f3831",
+            "region": "shanghai2-cucc;beijing66-cmcc",
+            "name": "qingyin"
+        }
+      ],
+      "isp_region": {
+          "AP": ["HK", "TW", "JP", "KP", "KR", "MN", "BD", "BT", "IO", "IN", "MV", "NP", "PK", "LK", "BN", "KH", "TL", "ID", "LA", "MY", "MM","PH", "SG", "TH", "AU", "NZ", "FM", "PF"],
+          "VN": ["VN"]
+      },
+      "worker_role": "subscriber",
+      "cloud_provider": ["aliyun", "aws", "capital", "jinshan", "huaweiyun"],
+      "random_distance": "100;500;1000",
+      "converge_key_list": ["appId","cname","uid"],
+      "converge_strategy": "strong_converge",
+      "service_name": "mix_streaming",
+      "env_conf": "/etc/voice/mix_streaming-env.json",
+      "serve_sdk_port": 36003,
+      "serve_edge_port": 4318,
+      "audio_expire_time": 720,
+      "video_expire_time": 720
+}
